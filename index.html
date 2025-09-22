@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>迎着逆境挥一刀</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(circle at 70% 30%, #374151 0%, #111827 100%);
+      min-height: 100vh;
+      color: #eee;
+      font-family: 'Noto Sans SC', '微软雅黑', Arial, sans-serif;
+      overflow: hidden;
+    }
+    .container {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+    }
+    .phrase1 {
+      position: absolute;
+      left: 8vw;
+      top: 12vh;
+      font-size: 3.2rem;
+      font-weight: bold;
+      color: #60a5fa;
+      letter-spacing: 0.15em;
+      text-shadow: 0 6px 36px #1e293bdd, 0 2px 8px #1e293b99;
+      white-space: nowrap;
+    }
+    .phrase2 {
+      position: absolute;
+      right: 10vw;
+      top: 38vh;
+      font-size: 2rem;
+      font-weight: 500;
+      color: #fbbf24;
+      text-shadow: 0 2px 18px #374151cc;
+      transform: rotate(-5deg);
+      white-space: nowrap;
+    }
+    .phrase3 {
+      position: absolute;
+      left: 18vw;
+      bottom: 14vh;
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: #f3f4f6;
+      opacity: 0.82;
+      letter-spacing: 0.07em;
+      text-shadow: 0 2px 8px #11182788;
+      transform: rotate(2deg);
+      white-space: nowrap;
+    }
+    /* 响应式 */
+    @media (max-width: 700px) {
+      .phrase1 {
+        font-size: 2rem;
+        left: 5vw;
+        top: 8vh;
+      }
+      .phrase2 {
+        font-size: 1.2rem;
+        right: 5vw;
+        top: 30vh;
+      }
+      .phrase3 {
+        font-size: 0.9rem;
+        left: 10vw;
+        bottom: 10vh;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="phrase1">迎着逆境挥一刀，</div>
+    <div class="phrase2">哪怕解决不了问题，</div>
+    <div class="phrase3">心情也好。</div>
+  </div>
+</body>
+</html>
