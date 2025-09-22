@@ -251,7 +251,7 @@
         </div>
     </div>
     <div class="card">
-        <h2>Shorten-URL</h2> （内部使用，不定期清理。）
+        <h2>Shorten-URL</h2>
         <div class="form-group">
             <label for="url">长链接:</label>
             <input type="text" id="url" name="url" placeholder="例：https://t.me/buhuaqian" value="" />
@@ -298,7 +298,7 @@
                 // 在弹窗上显示短链接
 
                 dialog.querySelector('.dialog-body').innerHTML =
-                    `<p>短链接：<span id="shortUrl">${location.host}/${data.data.shortUrl}</span></p>`;
+                    `<p>短链接：<span id="shortUrl">${location.host}/${data.data.shortUrl}</span></p><p>（内部使用，不定期清理。）</p>`;
                 // 在弹窗上显示复制按钮
                 dialog.querySelector('.dialog-footer').innerHTML =
                     `<button class="copy" id="copy">复制</button>`;
