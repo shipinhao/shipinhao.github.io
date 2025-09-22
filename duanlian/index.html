@@ -35,7 +35,7 @@
             border-radius: 10px;
             overflow: hidden;
             border: 1px solid #9b9ea0;
-            margin-top: 48px; /* 向上移，原先无margin，改为48px */
+            margin-top: 48px;
             box-sizing: border-box;
         }
 
@@ -86,7 +86,7 @@
         /* 广告容器样式 */
         .ad-container {
             width: 800px;
-            margin: 24px 0 0 0; /* 与card的间距 */
+            margin: 24px 0 0 0;
             border-radius: 10px;
             overflow: hidden;
             box-sizing: border-box;
@@ -96,7 +96,6 @@
             justify-content: center;
             align-items: center;
             padding: 0;
-            /* 不设定高度，高度自适应 */
         }
 
         .ad-container a {
@@ -121,13 +120,11 @@
             display: flex;
             opacity: 0;
             justify-content: center;
-            /* align-items: center; */
             z-index: -1;
             transition: opacity .4s ease-out, all .2s;
             transform: translateZ(0);
         }
 
-        /* 弹窗 */
         .dialog-content {
             width: 450px;
             margin-top: 0;
@@ -152,7 +149,6 @@
 
         .dialog-content>.dialog-header>.dialog-close {
             cursor: pointer;
-            /* 不可选中 */
             user-select: none;
         }
 
@@ -185,7 +181,6 @@
             display: block;
         }
 
-        /* 显示弹窗 */
         .dialog-show {
             opacity: 1;
             z-index: 100;
@@ -220,7 +215,6 @@
             text-decoration: underline;
         }
 
-        /* 响应式，窄屏下自适应 */
         @media (max-width: 850px) {
             .card,
             .ad-container {
@@ -244,9 +238,6 @@
             </div>
             <div class="dialog-footer">
                 <!-- 复制按钮 -->
-                <!-- <button class="copy" id="copy">复制</button> -->
-                <!-- 确定按钮 -->
-                <!-- <button class="conform" id="conform">确定</button> -->
             </div>
         </div>
     </div>
@@ -294,11 +285,10 @@
                 else
                     throw res;
             }).then(function (data) {
-                // alert('提交成功，短链接为：' + data.data.shortUrl);
-                // 在弹窗上显示短链接
-
+                // 构建完整短链
+                var fullShortUrl = 'https://' + location.host + '/' + data.data.shortUrl;
                 dialog.querySelector('.dialog-body').innerHTML =
-                    `<p>短链接：<span id="shortUrl">${location.host}/${data.data.shortUrl}</span></p><p>（内部使用，不定期清理。）</p>`;
+                    `<p>短链接：<span id="shortUrl">${fullShortUrl}</span></p><p>（内部使用，不定期清理。）</p>`;
                 // 在弹窗上显示复制按钮
                 dialog.querySelector('.dialog-footer').innerHTML =
                     `<button class="copy" id="copy">复制</button>`;
@@ -306,18 +296,24 @@
                 // 复制按钮
                 var copy = document.getElementById('copy');
                 copy.onclick = function () {
-                    // 将短链接复制到剪贴板
-                    var shortUrl = document.querySelector('#shortUrl');
                     try {
-                        let range = document.createRange();
-                        range.selectNode(shortUrl);
-                        window.getSelection().removeAllRanges();
-                        window.getSelection().addRange(range);
-                        document.execCommand('copy');
-                        window.getSelection().removeAllRanges();
-                        console.log('Copy success')
+                        // 优先用Clipboard API
+                        if (navigator.clipboard) {
+                            navigator.clipboard.writeText(fullShortUrl);
+                        } else {
+                            // 兼容旧浏览器
+                            var temp = document.createElement("input");
+                            temp.style.position = "absolute";
+                            temp.style.left = "-9999px";
+                            document.body.appendChild(temp);
+                            temp.value = fullShortUrl;
+                            temp.select();
+                            document.execCommand("copy");
+                            document.body.removeChild(temp);
+                        }
+                        console.log('Copy success');
                     } catch (e) {
-                        console.log('Copy error')
+                        console.log('Copy error');
                     }
                 }
                 // 显示弹窗
@@ -348,7 +344,6 @@
         }
         // 点击空白处关闭弹窗
         dialog.onclick = function (e) {
-            // 阻止事件冒泡
             e.stopPropagation();
             if (e.target == dialog) {
                 dialog.classList.remove('dialog-show');
