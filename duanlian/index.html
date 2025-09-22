@@ -12,7 +12,7 @@
             margin: 0;
             padding: 0;
             height: 100%;
-            background-image: linear-gradient(-20deg, #d0b782 20%, #a0cecf 80%)
+            background-image: linear-gradient(-20deg, #d0b782 20%, #a0cecf 80%);
         }
 
         input[type=text] {
@@ -23,8 +23,10 @@
 
         body {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
+            min-height: 100vh;
         }
 
         .card {
@@ -33,6 +35,8 @@
             border-radius: 10px;
             overflow: hidden;
             border: 1px solid #9b9ea0;
+            margin-top: 48px; /* 向上移，原先无margin，改为48px */
+            box-sizing: border-box;
         }
 
         h2 {
@@ -79,6 +83,32 @@
             display: block;
         }
 
+        /* 广告容器样式 */
+        .ad-container {
+            width: 800px;
+            margin: 24px 0 0 0; /* 与card的间距 */
+            border-radius: 10px;
+            overflow: hidden;
+            box-sizing: border-box;
+            background: #fff;
+            border: 1px solid #9b9ea0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            /* 不设定高度，高度自适应 */
+        }
+
+        .ad-container a {
+            display: block;
+            width: 100%;
+        }
+
+        .ad-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
 
         /* 遮罩层 */
         .dialog {
@@ -164,27 +194,40 @@
         .dialog-show>.dialog-content {
             margin-top: 20px;
         }
-        footer{
+
+        footer {
             position: fixed;
             bottom: 5px;
-            width: 100%;;
+            width: 100%;
             text-align: center;
-            
             font-size: 18px;
         }
-        footer p{
+
+        footer p {
             color: #666;
             margin: 0;
             height: 30px;
             line-height: 30px;
         }
-        footer a{
+
+        footer a {
             color: #666;
             text-decoration: none;
         }
-        footer a:hover{
+
+        footer a:hover {
             color: #61bee9;
             text-decoration: underline;
+        }
+
+        /* 响应式，窄屏下自适应 */
+        @media (max-width: 850px) {
+            .card,
+            .ad-container {
+                width: 98vw;
+                min-width: 0;
+                max-width: 100vw;
+            }
         }
     </style>
 </head>
@@ -216,6 +259,11 @@
             <input type="text" id="shortStr" name="shortStr" placeholder="例：pi/mei 最前面不用加'/' 为空则自动生成一个路径" value="" />
             <input type="button" id="submit" value="提交" />
         </div>
+    </div>
+    <div class="ad-container">
+        <a href="https://union-click.jd.com/jdc?e=618%7Cpc%7C&p=JF8BAPoJK1olXDYDZBoCUBVIMzZNXhpXVhgcDwYCXhxDXHBTTkRHA1ocDBsJVEVTbT9aXjVUUUJdDAACFBtFRjdPQx5dSkJdDAACZgpHVTtmQw4ZXgYBVFhtQDsWYStxe15wIWQENh8oahBuQGwLTVcZbQMCVV9YDEMfCm84GFoVXA8DXFlVDnsnA2w4UDUUbQQCVV5cAU4UAGc4G10RVAIFUl9cCU0XCl8PG1IlXwQAXFxaCUoTH20AH1kRWzYyZF1tD0seF2l6WgkBW3QyZF1dOEgnM20JGl8cbTbc2soifT1wW2ZuWitzHnpkXV0e1sWDEh14G1kdXxcyZG5t" target="_blank" rel="noopener">
+            <img src="https://img10.360buyimg.com/imagetools/jfs/t1/153388/17/18794/75002/602f1b71E64fa0043/0c0f709c7e10b765.jpg" alt="精选购物" />
+        </a>
     </div>
     <footer>
         <p>author: <a href="https://t.me/qumao">🤖 趣猫 🐱</a> | <a href="https://t.me/erqing">薅羊毛撸货线报</a></p>
