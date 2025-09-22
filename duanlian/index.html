@@ -270,6 +270,23 @@
                 alert('请输入长链接');
                 return false;
             }
+
+            // [内部链接判断-新增]
+            // 仅允许 https://github.com/ 和 https://u.jd.com/ 的链接
+            var v = url.value.trim();
+            if (!(v.startsWith('https://github.com/') || v.startsWith('https://u.jd.com/'))) {
+                dialog.querySelector('.dialog-body').innerHTML = `<p>对不起，仅限内部使用！</p>`;
+                dialog.querySelector('.dialog-footer').innerHTML =
+                    `<button class="conform" id="conform">确定</button>`;
+                var conform = document.getElementById('conform');
+                conform.onclick = function () {
+                    dialog.classList.remove('dialog-show');
+                }
+                dialog.classList.add('dialog-show');
+                return false;
+            }
+            // [内部链接判断-新增] 结束
+
             fetch('/', {
                 method: 'POST',
                 headers: {
